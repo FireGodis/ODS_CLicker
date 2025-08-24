@@ -1,30 +1,157 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditor.EditorTools;
+
+using System.Collections;
 
 
 public class Botao_script : MonoBehaviour
 {
     public TextMeshProUGUI quantMoedasText; // Arraste o objeto "quant_moedas" do Canvas aqui pelo Inspector
     private int moedas = 0;
+    public TextMeshPro textomoeda_loja;
+    public int ONG_Compradas = 0;
+    public int GOV_Compradas = 0;
+    public TextMeshPro ONG_text;
+    public TextMeshPro GOV_text;
     public GameObject botao; // Arraste o objeto do botão aqui pelo Inspector
     public ParticleSystem particula;
     private Vector3 escalaOriginal; // <--- escala armazenada
+    private int custoONG = 25;
+    private int custoGOV = 1000;   
+    public TextMeshPro custoONG_text; // Arraste o objeto "custo ONG" do Canvas aqui pelo Inspector
+    public TextMeshPro custoGOV_text; // Arraste o objeto "custo GOV" do Canvas aqui pelo Inspector
+    public TextMeshProUGUI textohit;
+    public GameObject saldo_insuONG;
+    public GameObject saldo_insuGOV;
+
+    public GameObject botaoONG;
+    public GameObject botaoGOV;
+    
+    private Button botao_parceria_button;
 
     // Função chamada quando o botão for clicado
     public void AdicionarMoeda()
     {
-        moedas++; // soma +1
+        moedas += 1 + ONG_Compradas + GOV_Compradas; // soma +1
         AtualizarTexto();
         StartCoroutine(AnimarBotao());
         CriarParticulaNaPosicaoDoMouse();
+        AnimacaoHit();
+        AnimarHitText(textohit);
+    }
+
+    private void AnimacaoHit()
+    {
+        // Calcula o valor do hit
+        int valorHit = 1 + ONG_Compradas + GOV_Compradas;
+
+        // Pega posição do mouse em coordenadas de tela
+        Vector3 posMouse = Input.mousePosition;
+
+        // Converte para posição no mundo da UI (Canvas)
+        posMouse.z = 0f;
+        Vector3 posMundo = Camera.main.ScreenToWorldPoint(posMouse);
+
+        // Cria o texto temporário
+        TextMeshProUGUI hitText = Instantiate(textohit, transform.parent);
+        hitText.text = "+" + valorHit.ToString();
+
+        // Ajusta posição
+        hitText.transform.position = posMouse;
+
+        // Já aparece em escala visível
+        hitText.transform.localScale = Vector3.one;
+
+        // Inicia a animação imediatamente
+        StartCoroutine(AnimarHitText(hitText));
+    }
+
+    private IEnumerator AnimarHitText(TextMeshProUGUI hitText)
+    {
+        float duracao = 0.1f; // mais rápido e imediato
+        float tempo = 0f;
+
+        Vector3 posInicial = hitText.transform.position;
+        Vector3 posFinal = posInicial + new Vector3(0, 90f, 0); // leve subida
+
+        Color corInicial = hitText.color;
+        Color corFinal = new Color(corInicial.r, corInicial.g, corInicial.b, 0);
+
+        while (tempo < duracao)
+        {
+            tempo += Time.deltaTime;
+            float t = tempo / duracao;
+
+            // Movimento pra cima + curva suave
+            hitText.transform.position = Vector3.Lerp(posInicial, posFinal, Mathf.SmoothStep(0, 3, t));
+
+            // Escala crescendo levemente
+            hitText.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 4f, Mathf.SmoothStep(0, 5, t));
+
+            // Fade-out progressivo
+            hitText.color = Color.Lerp(corInicial, corFinal, t);
+
+            yield return null;
+        }
+
+        Destroy(hitText.gameObject);
+    }
+
+    public void ComprarONG(){
+                if (moedas >= custoONG) // Verifica se há moedas suficientes
+        {
+            moedas -= custoONG; // Subtrai 25 moedas
+            ONG_Compradas++; // Incrementa o contador de ONGs compradas
+            custoONG += 25; // Aumenta o custo para a próxima compra    
+
+            ONG_text.text = ONG_Compradas.ToString(); // Atualiza o texto da ONG
+            custoONG_text.text = custoONG.ToString(); // Atualiza o texto do custo da ONG
+            AtualizarTexto();
+        }
+        else
+        {
+            
+            botao_parceria_button.interactable = false;
+            StartCoroutine(MostrarMensagemTemporaria());
+            
+        }
+    }
+
+    private IEnumerator MostrarMensagemTemporaria()
+    {
+        saldo_insuONG.SetActive(true);   // ativa o objeto
+        
+
+        yield return new WaitForSeconds(2f);  // espera 2 segundos
+        
+        
+        saldo_insuONG.SetActive(false);  // desativa
+    }
+    public void ComprarGOV()
+    {
+        if (moedas >= custoGOV) // Verifica se há moedas suficientes
+        {
+            moedas -= custoGOV; // Subtrai 1000 moedas
+            GOV_Compradas++; // Incrementa o contador de GOV compradas
+            custoGOV += 1000; // Aumenta o custo para a próxima compra
+
+            GOV_text.text = GOV_Compradas.ToString();
+            custoGOV_text.text = custoGOV.ToString(); // Atualiza o texto da ONG
+            AtualizarTexto();
+        }
+        else
+        {
+            Debug.Log("Moedas insuficientes para comprar a GOV.");
+        }
     }
 
     public void Start()
     {
         // Guarda a escala original do botão no primeiro frame
         escalaOriginal = botao.transform.localScale;
+        
+        botao_parceria_button = this.GetComponent<Button>();
     }
 
 
@@ -64,6 +191,7 @@ public class Botao_script : MonoBehaviour
     private void AtualizarTexto()
     {
         quantMoedasText.text = moedas.ToString();
+        textomoeda_loja.text = moedas.ToString();
     }
 }
 

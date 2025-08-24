@@ -28,7 +28,8 @@ Em vez de apenas transmitir informação, ODS Clicker **gamifica o aprendizado**
 O ODS Clicker está diretamente relacionado ao **ODS 17 – Parcerias e meios de implementação**, pois evidencia o papel da cooperação entre diferentes setores.  
 Além disso, o projeto se conecta indiretamente a outros ODS, como:  
 - **ODS 4 – Educação de Qualidade**, por sua função educativa.  
-- **ODS 10 – Redução das Desigualdades**, ao promover a conscientização sobre cooperação global.  
+- **ODS 10 – Redução das Desigualdades**, ao promover a conscientização sobre cooperação global.
+- **ODS 17 – Parcerias e Meios de Implementação**, pois o jogo simula a criação de parcerias com ONGs,
 
 ---
 

@@ -59,9 +59,11 @@ Além disso, o projeto se conecta indiretamente a outros ODS, como:
 - Trilha sonora contínua e automática.  
 
 ### Futuras (extras)  
-- Ranking online de jogadores.  
+- Consquistas e desbloqueio de upgrades especiais
 - Novas entidades para compra (empresas, instituições internacionais etc.).  
-- Melhorias de acessibilidade digital (leitores de tela, legendas, modo daltônico).  
+- Melhorias de acessibilidade digital (leitores de tela, legendas, modo daltônico).
+- Mudanças em tempo real do mapa mundi
+- Aperfeiçoamento de efeitos visuais, como por exemplo colocar particulas que simulem núvem na frente do mapa mundi
 
 ---
 

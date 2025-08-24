@@ -506,7 +506,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247663921}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 2ab862a52305e5e43b594f4e6116e872, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 159af0c4beb91544290e4328fef15444, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1306,7 +1306,7 @@ Transform:
   m_GameObject: {fileID: 494921967}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.07, y: -4.13, z: 0}
+  m_LocalPosition: {x: -1.07, y: -4.13, z: -0.18}
   m_LocalScale: {x: 0.204467, y: 0.39896, z: 0.39896}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1688,7 +1688,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294967039
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -4494,7 +4494,7 @@ RectTransform:
   m_GameObject: {fileID: 1534701005}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.4966016, y: 2.4966016, z: 2.4966016}
+  m_LocalScale: {x: 2.0994172, y: 2.0994172, z: 2.0994172}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1510829648}
@@ -5014,6 +5014,8 @@ MonoBehaviour:
   saldo_insuGOV: {fileID: 1883330070}
   botaoONG: {fileID: 1299699871}
   botaoGOV: {fileID: 1962990343}
+  quant_moedas: {fileID: 1457001560}
+  mapa: {fileID: 666408034}
 --- !u!1 &1872504465
 GameObject:
   m_ObjectHideFlags: 0
@@ -6066,7 +6068,7 @@ Transform:
   m_GameObject: {fileID: 2121250624}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.06, y: -4.13, z: 0}
+  m_LocalPosition: {x: 1.06, y: -4.13, z: -0.32}
   m_LocalScale: {x: 0.204467, y: 0.39896, z: 0.39896}
   m_ConstrainProportionsScale: 0
   m_Children: []

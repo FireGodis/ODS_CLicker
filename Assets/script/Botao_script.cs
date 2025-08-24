@@ -27,24 +27,38 @@ public class Botao_script : MonoBehaviour
 
     public GameObject botaoONG;
     public GameObject botaoGOV;
-    
+    public TextMeshProUGUI quant_moedas;
+    public SpriteRenderer mapa; // mudei para Image porque Sprite sozinho não tem cor
+    private int moedasMax = 10000;
+
     private Button botao_parceria_button;
 
     // Função chamada quando o botão for clicado
     public void AdicionarMoeda()
     {
-        moedas += 1 + ONG_Compradas + GOV_Compradas; // soma +1
+        // Valor base
+        int valorDoClique = 1;
+
+        // Cada ONG dá +2 por clique
+        valorDoClique += ONG_Compradas * 2;
+
+        // Cada GOV dá +10 por clique
+        valorDoClique += GOV_Compradas * 10;
+
+        // Soma ao total de moedas
+        moedas += valorDoClique;
+
         AtualizarTexto();
         StartCoroutine(AnimarBotao());
         CriarParticulaNaPosicaoDoMouse();
-        AnimacaoHit();
+        AnimacaoHit(valorDoClique);
         AnimarHitText(textohit);
     }
 
-    private void AnimacaoHit()
+    private void AnimacaoHit(int valor)
     {
         // Calcula o valor do hit
-        int valorHit = 1 + ONG_Compradas + GOV_Compradas;
+        int valorHit = valor;
 
         // Pega posição do mouse em coordenadas de tela
         Vector3 posMouse = Input.mousePosition;
@@ -190,8 +204,13 @@ public class Botao_script : MonoBehaviour
 
     private void AtualizarTexto()
     {
+        // Atualiza os textos
         quantMoedasText.text = moedas.ToString();
         textomoeda_loja.text = moedas.ToString();
+
+        // --- fiscalização do valor das moedas ---
+        float t = Mathf.Clamp01((float)moedas / moedasMax);
+        mapa.color = Color.Lerp(Color.black, Color.white, t);
     }
 }
 

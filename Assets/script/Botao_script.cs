@@ -127,12 +127,12 @@ public class Botao_script : MonoBehaviour
         {
             
             botao_parceria_button.interactable = false;
-            StartCoroutine(MostrarMensagemTemporaria());
+            StartCoroutine(MostrarMensagemTemporariaONG());
             
         }
     }
 
-    private IEnumerator MostrarMensagemTemporaria()
+    private IEnumerator MostrarMensagemTemporariaONG()
     {
         saldo_insuONG.SetActive(true);   // ativa o objeto
         
@@ -141,6 +141,16 @@ public class Botao_script : MonoBehaviour
         
         
         saldo_insuONG.SetActive(false);  // desativa
+    }
+    private IEnumerator MostrarMensagemTemporariaGOV()
+    {
+        saldo_insuGOV.SetActive(true);   // ativa o objeto
+
+
+        yield return new WaitForSeconds(2f);  // espera 2 segundos
+
+
+        saldo_insuGOV.SetActive(false);  // desativa
     }
     public void ComprarGOV()
     {
@@ -156,7 +166,7 @@ public class Botao_script : MonoBehaviour
         }
         else
         {
-            Debug.Log("Moedas insuficientes para comprar a GOV.");
+            StartCoroutine(MostrarMensagemTemporariaGOV());
         }
     }
 
